@@ -1,0 +1,65 @@
+/*INSERT GROUP ID AND COOKIE BELOW*/
+ 
+var groupId = 4688979 // << Replace 12345 with your Group Id
+var cookie = "_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_DD6373136269F2F2BB71E996296578382FC8D9DDB3A28CC6AD0E32DCCD817B871CFE7D53EE93AAB93859E0C91F8CB1AECA93FAAAC8394F8774D633F9D63EF4F0478F761CC028CA6165DE6EECC30605DCE30663EA4CA9EF1830CD13EAC3C2A7D3A931051E6BDDF26C3F885DAB37C7A162AFCC2FF55F1FE80FDB60B2E85B2C81CE852AB12DF322D0DABCD8DF856D53EACCF6612DE03FABF384944EF49952458D2CA8E873BE9BCF4EB0A394EC3476CC32FB5BC48E188F2C199A1DDF6BF3A2A8AC2D079322E4E84967A416C953A8F440FDB786F32ACC0D2932D87A66A37F37B3762106884DF6651767A4279E04BDE5152E095B0AD6BF78570866A49F7A82189D8B0141D90A68EDA0CC764B39F999243226BDFBFBDB520AC29514F74E121C6197AAAA98A75EE8B8404316CC77875F7895D71C5FA73191" // << Put your account cookie inside of the quotes
+ 
+/*INSERT GROUP ID AND COOKIE ABOVE*/
+ 
+ 
+const express = require("express");
+const rbx = require("noblox.js");
+const app = express();
+ 
+app.use(express.static("public"));
+ 
+async function startApp() {
+  await rbx.cookieLogin(cookie);
+  let currentUser = await rbx.getCurrentUser();
+  console.log(currentUser.UserName);
+}
+startApp();
+ 
+app.get("/ranker", (req, res) => {
+    var User = req.param("userid");
+    var Rank = req.param("rank");
+ 
+    rbx.setRank(groupId, parseInt(User), parseInt(Rank));
+    res.json("Ranked!");
+});
+ 
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + listener.address().port);
+});
+RAW Paste Data
+/*INSERT GROUP ID AND COOKIE BELOW*/
+
+var groupId = 12345 // << Replace 12345 with your Group Id
+var cookie = "" // << Put your account cookie inside of the quotes
+
+/*INSERT GROUP ID AND COOKIE ABOVE*/
+
+
+const express = require("express");
+const rbx = require("noblox.js");
+const app = express();
+
+app.use(express.static("public"));
+
+async function startApp() {
+  await rbx.cookieLogin(cookie);
+  let currentUser = await rbx.getCurrentUser();
+  console.log(currentUser.UserName);
+}
+startApp();
+
+app.get("/ranker", (req, res) => {
+    var User = req.param("userid");
+    var Rank = req.param("rank");
+  
+    rbx.setRank(groupId, parseInt(User), parseInt(Rank));
+    res.json("Ranked!");
+});
+
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + listener.address().port);
+});
